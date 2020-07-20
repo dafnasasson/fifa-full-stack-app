@@ -13,7 +13,34 @@ const App = () => {
 		setWageRange({ min: value, max: value + 100 });
 	};
 
-	const showPlayersHandler = () => {
+	const showPlayersHandler = async () => {
+		// const response = await fetch('localhost:5000/players', {
+		// 	method: 'POST',
+		// 	headers:{
+		// 		'Content-Type': 'application/json'
+		// 	},
+		// 	body: JSON.stringify({
+		// 		noom:"cute"
+		// 	})
+		// });
+
+		var url = new URL('http://localhost:5000/players');
+
+		var params = { minAge: 20, maxAge: 25, minWage: 100, maxWage: 200 };
+
+		url.search = new URLSearchParams(params).toString();
+		console.log('-------whaaaaaaaaaaaaaaaaaaaaa');
+
+		const response = await fetch(url);
+
+		const resJson = await response.json();
+		console.log(resJson);
+		console.log('-------whaaaaaaaaaaaaaaaaaaaaa');
+		// 	const response = await fetch('http://localhost:5000/players', { qs: { a: 1, b: 2 } });
+
+		// const resJson = await response.json();
+		// console.log(resJson);
+
 		let intervals = [];
 
 		//prepare the age group data
