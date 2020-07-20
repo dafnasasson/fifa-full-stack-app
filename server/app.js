@@ -8,17 +8,17 @@ const allPlayers = require('./data/playersData');
 //**** used to initialize the db with player data id the collections is empty ****/
 initMongoPlayers.createPlayers(allPlayers.players);
 
-// const app = express();
+const app = express();
 
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
-// app.use((req, res, next) => {
-// 	res.setHeader('Access-Control-Allow-Origin', '*');
-// 	res.setHeader('Access-Control-Allow-Headers', '*');
+app.use((req, res, next) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Headers', '*');
 
-// 	res.setHeader('Access-Control-Allow-Methods', '*');
-// 	next();
-// });
-// app.use('/players', playersRoute);
+	res.setHeader('Access-Control-Allow-Methods', '*');
+	next();
+});
+app.use('/players', playersRoute);
 
-// app.listen(5000);
+app.listen(5000);

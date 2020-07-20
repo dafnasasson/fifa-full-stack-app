@@ -14,28 +14,9 @@ const App = () => {
 	};
 
 	const showPlayersHandler = async () => {
-		// const response = await fetch('localhost:5000/players', {
-		// 	method: 'POST',
-		// 	headers:{
-		// 		'Content-Type': 'application/json'
-		// 	},
-		// 	body: JSON.stringify({
-		// 		noom:"cute"
-		// 	})
-		// });
-
 		var url = new URL('http://localhost:5000/players');
 
-		var params = { minAge: 20, maxAge: 25, minWage: 100, maxWage: 200 };
-
-		url.search = new URLSearchParams(params).toString();
-		console.log('-------whaaaaaaaaaaaaaaaaaaaaa');
-
-		const response = await fetch(url);
-
-		const resJson = await response.json();
-		console.log(resJson);
-		console.log('-------whaaaaaaaaaaaaaaaaaaaaa');
+		var params = { minAge: 15, maxAge: 20, minWage: 0, maxWage: 100 };
 		// 	const response = await fetch('http://localhost:5000/players', { qs: { a: 1, b: 2 } });
 
 		// const resJson = await response.json();
@@ -50,21 +31,34 @@ const App = () => {
 
 		let delay = 3000;
 		for (let i = 0; i < intervals.length; i++) {
-			let [ min, max ] = [ intervals[i].minAge, intervals[i].maxAge ];
+			let [ minAge, maxAge ] = [ intervals[i].minAge, intervals[i].maxAge ];
+			let [ minWage, maxWage ] = [ wageRange.min, wageRange.max ];
+
+			params.minAge = minAge;
+			params.maxAge = maxAge;
+			params.minWage = minWage;
+			params.maxWage = maxWage;
+
+			url.search = new URLSearchParams(params).toString();
+
+			const response = await fetch(url);
+
+			const resJson = await response.json();
 			//get players in relevant ages
-			let playerz = players.filter(
-				(player) =>
-					player.Age >= min &&
-					player.Age <= max &&
-					player.Wage >= wageRange.min &&
-					player.Wage <= wageRange.max
-			);
+			// let playerz = players.filter(
+			// 	(player) =>
+			// 		player.Age >= minAge &&
+			// 		player.Age <= maxAge &&
+			// 		player.Wage >= wageRange.min &&
+			// 		player.Wage <= wageRange.max
+			// );
 
-			playerz = playerz.sort(() => Math.random() - Math.random()).slice(0, 30);
+			// playerz = playerz.sort(() => Math.random() - Math.random()).slice(0, 30);
 
+			console.log(resJson);
 			setTimeout(() => {
-				setAgeRange({ min: min, max: max });
-				setPlayersInCurrentAgeRange(playerz);
+				setAgeRange({ min: minAge, max: maxAge });
+				setPlayersInCurrentAgeRange(resJson);
 			}, delay * i);
 		}
 	};
