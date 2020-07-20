@@ -1,22 +1,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const mongo = require('./mongo');
 const playersRoute = require('./routes/players-routes');
+const initMongoPlayers = require('./initMongoPlayers');
+const allPlayers = require('./data/playersData');
 
-const app = express();
+//**** used to initialize the db with player data id the collections is empty ****/
+initMongoPlayers.createPlayers(allPlayers.players);
 
-app.use(bodyParser.json());
+// const app = express();
 
-app.use((req,res,next)=>{
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', '*');
+// app.use(bodyParser.json());
 
-    res.setHeader('Access-Control-Allow-Methods', '*' );
-    next();
-})
-app.use('/players', playersRoute);
+// app.use((req, res, next) => {
+// 	res.setHeader('Access-Control-Allow-Origin', '*');
+// 	res.setHeader('Access-Control-Allow-Headers', '*');
 
+// 	res.setHeader('Access-Control-Allow-Methods', '*');
+// 	next();
+// });
+// app.use('/players', playersRoute);
 
-
-
-app.listen(5000);
+// app.listen(5000);
