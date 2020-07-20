@@ -3,9 +3,6 @@ import ReactApexChart from 'react-apexcharts';
 import DiscreteSlider from '../UI/DiscreteSlider';
 
 const Chart = (props) => {
-	console.log(props.wageRanges.min);
-	console.log(props.wageRanges.max);
-
 	let options = {
 		chart: {
 			height: 350,
