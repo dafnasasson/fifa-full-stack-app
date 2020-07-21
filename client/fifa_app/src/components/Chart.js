@@ -29,14 +29,14 @@ const Chart = (props) => {
 			max: 100
 		},
 		markers: {
-			size: 8
+			size: 30
 		},
 		fill: {
 			type: 'image',
 			opacity: 0.9,
 			image: {
-				width: 16,
-				height: 16
+				width: 60,
+				height: 60
 			}
 		},
 		legend: {
@@ -52,9 +52,8 @@ const Chart = (props) => {
 	});
 
 	let imagesSrc = props.players.map((player) => {
-		return `https://dummyimage.com/60x60/${Math.floor(Math.random() * 360)}${Math.floor(
-			Math.random() * 360
-		)}${Math.floor(Math.random() * 1000)}/fff`;
+		//const index = Math.floor(Math.random()*200);
+		return `http://localhost:5000/images/${player.Index}.png`;
 	});
 
 	options.fill.image.src = imagesSrc;
