@@ -200278,8 +200278,5 @@ let players = [
 	}
 ];
 
-// let playersSortedByAgeAscd = [ ...playersOriginalData ];
-// playersSortedByAgeAscd.sort((playerA, playerB) => playerA.Age - playerB.Age);
-// playersSortedByAgeAscd = JSON.parse(JSON.stringify(playersSortedByAgeAscd));
 
 exports.players = players;

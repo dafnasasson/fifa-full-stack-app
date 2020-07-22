@@ -2,7 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 const url = 'mongodb+srv://dafna:Ds201117827@players.hqacl.mongodb.net/players?retryWrites=true&w=majority';
 
-const createPlayers = async (players) => {
+const createPlayersIfNeeded = async (players) => {
 	const client = new MongoClient(url);
 
 	try {
@@ -24,4 +24,4 @@ const createPlayers = async (players) => {
 	}
 };
 
-exports.createPlayers = createPlayers;
+exports.createPlayersIfNeeded = createPlayersIfNeeded;

@@ -100,10 +100,6 @@ const Chart = (props) => {
 			};
 		});
 		imagesSrc = props.players.map((player) => {
-			//logic for frontend only
-			// const index = Math.floor(Math.random() * 100);
-			// return window.location.origin + `/images/${index}.png`;
-			//-------//
 			return `http://localhost:5000/images/${player.Index}.png`;
 		});
 	}
@@ -124,77 +120,3 @@ const Chart = (props) => {
 };
 
 export default Chart;
-
-// this.state = {
-
-//   series: [
-//     {
-//     name: 'Messenger',
-//     data: [
-//       [133, 5.4],
-//       [21.7, 4],
-//       [25.4, 3]
-//     ]
-//   }, {
-//     name: 'Instagram',
-//     data: [
-//       [6.4, 5.4],
-//       [11.7, 4],
-//       [15.4, 3],
-//       [9, 2]
-//     ]
-//   }],
-//   options: {
-//     chart: {
-//       height: 350,
-//       type: 'scatter',
-//       animations: {
-//         enabled: false,
-//       },
-//       zoom: {
-//         enabled: false,
-//       },
-//       toolbar: {
-//         show: true
-//       }
-//     },
-
-//     xaxis: {
-//       tickAmount: 6,
-//       min: 0,
-//       max: 600
-//     },
-//     yaxis: {
-//       tickAmount: 6,
-//       min: 40,
-//       max: 100
-//     },
-//     markers: {
-//       size: 20
-//     },
-//     fill: {
-//       type: 'image',
-//       opacity: 1,
-//       image: {
-//         src: [logo2,logo2,logo2,logo2,logo2,logo2,logo2,logo2,logo2,logo2,],
-//         width: 40,
-//         height: 40
-//       }
-//     },
-//     legend: {
-//       show:false,
-//       labels: {
-//         useSeriesColors: true
-//       },
-//       markers: {
-//         customHTML: [
-//           function() {
-//             return ''
-//           }, function() {
-//             return ''
-//           }
-//         ]
-//       }
-//     }
-//   }
-// };

@@ -1,5 +1,4 @@
 const express = require('express');
-//const players = require('../data/dataManipulation');
 const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 
@@ -29,7 +28,7 @@ const getPlayers = async (req, res, next) => {
 			])
 			.toArray();
 	} catch (error) {
-		console.log('error');
+		console.log('error - could not find players in DB');
 		return res.json([]);
 	}
 

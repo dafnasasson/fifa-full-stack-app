@@ -33,10 +33,6 @@ export default function RangeSlider(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState([0, 100]);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
     return (
         <div className={classes.root}>
             <Typography id="range-slider" gutterBottom className={classes.title}>
@@ -54,7 +50,6 @@ export default function RangeSlider(props) {
                 min={0}
                 max={600}
                 disabled={props.disabled}
-            // getAriaValueText={valuetext}
             />
         </div>
     );

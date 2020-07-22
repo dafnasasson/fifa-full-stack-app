@@ -1,14 +1,11 @@
 import React from 'react';
-import './App.css';
 import Chart from './components/Chart';
-import playersSortedByAgeAscd from './data/playersData';
 import Button from '@material-ui/core/Button';
 import RangeSlider from './UI/RangeSlider';
 import Spinner from './UI/Spinner/Spinner';
 
 
 const App = () => {
-	const [players, setPlayers] = React.useState(playersSortedByAgeAscd);
 	const [playersInCurrentAgeRange, setPlayersInCurrentAgeRange] = React.useState([]);
 	const [wageRange, setWageRange] = React.useState({ min: 0, max: 100 });
 	const [ageRange, setAgeRange] = React.useState({});
@@ -25,11 +22,6 @@ const App = () => {
 		var url = new URL('http://localhost:5000/players');
 
 		var params = { minAge: 15, maxAge: 20, minWage: 0, maxWage: 100 };
-		// 	const response = await fetch('http://localhost:5000/players', { qs: { a: 1, b: 2 } });
-
-		// const resJson = await response.json();
-		// console.log(resJson);
-
 		let intervals = [];
 
 		//prepare the age group data
@@ -50,20 +42,8 @@ const App = () => {
 			url.search = new URLSearchParams(params).toString();
 
 			const response = await fetch(url);
-
 			const resJson = await response.json();
-			//get players in relevant ages
-			// let playerz = players.filter(
-			// 	(player) =>
-			// 		player.Age >= minAge &&
-			// 		player.Age <= maxAge &&
-			// 		player.Wage >= wageRange.min &&
-			// 		player.Wage <= wageRange.max
-			// );
 
-			// playerz = playerz.sort(() => Math.random() - Math.random()).slice(0, 30);
-
-			console.log(resJson);
 			setTimeout(() => {
 				setAgeRange({ min: minAge, max: maxAge });
 				setPlayersInCurrentAgeRange(resJson);
@@ -74,7 +54,7 @@ const App = () => {
 
 	};
 	return (
-		<div className="App" style={{ marginBottom: '12vw', marginTop: '1vw', marginLeft: '12vw', marginRight: '16vw' }}>
+		<div style={{ marginBottom: '12vw', marginTop: '1vw', marginLeft: '12vw', marginRight: '16vw' }}>
 			<div style={{ height: '500px' }}>
 				<Chart
 					players={playersInCurrentAgeRange}
