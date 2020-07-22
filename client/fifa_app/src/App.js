@@ -11,14 +11,14 @@ const App = () => {
 	const [playersInCurrentAgeRange, setPlayersInCurrentAgeRange] = React.useState([]);
 	const [wageRange, setWageRange] = React.useState({ min: 0, max: 100 });
 	const [ageRange, setAgeRange] = React.useState({});
-	const [disabledButton, setDisabledButton] = React.useState(false);
+	const [isPlayed, setIsPlayed] = React.useState(false);
 
 	const sliderValueChangedHandler = (minValue, maxValue) => {
 		setWageRange({ min: minValue, max: maxValue });
 	};
 
 	const showPlayersHandler = async () => {
-		setDisabledButton(true);
+		setIsPlayed(true);
 		var url = new URL('http://localhost:5000/players');
 
 		var params = { minAge: 15, maxAge: 20, minWage: 0, maxWage: 100 };
@@ -34,7 +34,7 @@ const App = () => {
 			intervals.push({ minAge: i, maxAge: i + 5 });
 		}
 
-		let delay = 3000;
+		let delay = 1000;
 		for (let i = 0; i < intervals.length; i++) {
 			let [minAge, maxAge] = [intervals[i].minAge, intervals[i].maxAge];
 			let [minWage, maxWage] = [wageRange.min, wageRange.max];
@@ -64,8 +64,10 @@ const App = () => {
 			setTimeout(() => {
 				setAgeRange({ min: minAge, max: maxAge });
 				setPlayersInCurrentAgeRange(resJson);
+				if (minAge == 29) setIsPlayed(false);
 			}, delay * i);
 		}
+
 	};
 	return (
 		<div className="App" style={{ marginBottom: '12vw', marginTop: '1vw', marginLeft: '12vw', marginRight: '16vw' }}>
@@ -77,9 +79,9 @@ const App = () => {
 				onSliderChanged={sliderValueChangedHandler}
 			/>
 			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-				<RangeSlider onSliderChanged={sliderValueChangedHandler} />
+				<RangeSlider onSliderChanged={sliderValueChangedHandler} disabled={isPlayed} />
 			</div>
-			<Button variant="contained" color="primary" onClick={showPlayersHandler} >
+			<Button variant="contained" color="primary" onClick={showPlayersHandler} disabled={isPlayed}>
 				Play</Button>
 		</div>
 	);

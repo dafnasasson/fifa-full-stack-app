@@ -48,6 +48,7 @@ export default function RangeSlider(props) {
                 marks={marks}
                 min={0}
                 max={600}
+                disabled={props.disabled}
             // getAriaValueText={valuetext}
             />
         </div>
