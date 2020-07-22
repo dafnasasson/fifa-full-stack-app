@@ -17,13 +17,55 @@ const Chart = (props) => {
 				show: true
 			}
 		},
-
+		title: {
+			text: `FIFA PLAYER COMPARISION`,
+			align: 'center',
+			margin: 100,
+			offsetY: 15,
+			floating: true,
+			style: {
+				color: '#00cc99',
+				fontSize: '3.5vw'
+			}
+		},
+		subtitle: {
+			text: props.players.length === 0 ? `NO PLAYERS WITHIN AGE GROUP: ${props.ageRanges.min} - ${props.ageRanges.max}` : `PLAYERS WITHIN AGE GROUP: ${props.ageRanges.min} - ${props.ageRanges.max}`,
+			align: 'center',
+			margin: 30,
+			offsetY: 90,
+			floating: true,
+			style: {
+				color: props.players.length === 0 ? '#0099ff' : '#00cc99',
+				fontSize: '2vw',
+				fontWeight: 'bold'
+			}
+		},
 		xaxis: {
+			title: {
+				text: 'Wage',
+				style: {
+					fontSize: '20px',
+					fontWeight: 'bold',
+					fontFamily: undefined,
+					color: '#2eb8b8'
+				}
+
+			},
 			tickAmount: 10,
 			min: props.wageRanges.min,
 			max: props.wageRanges.max
 		},
 		yaxis: {
+			title: {
+				text: 'Overall Rate',
+				style: {
+					fontSize: '20px',
+					fontWeight: 'bold',
+					fontFamily: undefined,
+					color: '#2eb8b8'
+				}
+
+			},
 			tickAmount: 6,
 			min: 40,
 			max: 100
@@ -44,29 +86,41 @@ const Chart = (props) => {
 		}
 	};
 
+
 	let seriesArr = props.players.map((player) => {
 		return {
 			name: player.Name,
-			data: [ [ parseInt(player.Wage), player.Overall ] ]
+			data: [[parseInt(player.Wage), player.Overall]]
 		};
 	});
 
+	if (!props.players || props.players.length === 0) {
+		seriesArr = [{
+			name: 'gugul',
+			data: [[50, 50]]
+		}]
+
+		//options.fill.image.src = ['http://localhost:5000/images/1.png'];
+	}
+
+
 	let imagesSrc = props.players.map((player) => {
-		//const index = Math.floor(Math.random()*200);
+		//logic for frontend only
+		// const index = Math.floor(Math.random() * 100);
+		// return window.location.origin + `/images/${index}.png`;
+		//-------//
 		return `http://localhost:5000/images/${player.Index}.png`;
 	});
 
 	options.fill.image.src = imagesSrc;
+	if (!props.ageRanges.min) {
+		options.subtitle.text = '';
+	}
 
 	return (
 		<Fragment>
 			<div>
-				{props.ageRanges.min ? (
-					<h4>
-						Ages: {props.ageRanges.min}-{props.ageRanges.max}
-					</h4>
-				) : null}
-				<ReactApexChart options={options} series={seriesArr} type="scatter" height={350} />
+				<ReactApexChart options={options} series={seriesArr} type="scatter" height={600} />
 				<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 					<DiscreteSlider onSliderChanged={props.onSliderChanged} />
 				</div>

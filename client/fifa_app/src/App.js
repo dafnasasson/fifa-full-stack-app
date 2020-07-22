@@ -4,10 +4,10 @@ import Chart from './components/Chart';
 import playersSortedByAgeAscd from './data/playersData';
 
 const App = () => {
-	const [ players, setPlayers ] = React.useState(playersSortedByAgeAscd);
-	const [ playersInCurrentAgeRange, setPlayersInCurrentAgeRange ] = React.useState([]);
-	const [ wageRange, setWageRange ] = React.useState({ min: 0, max: 100 });
-	const [ ageRange, setAgeRange ] = React.useState({});
+	const [players, setPlayers] = React.useState(playersSortedByAgeAscd);
+	const [playersInCurrentAgeRange, setPlayersInCurrentAgeRange] = React.useState([]);
+	const [wageRange, setWageRange] = React.useState({ min: 0, max: 100 });
+	const [ageRange, setAgeRange] = React.useState({});
 
 	const sliderValueChangedHandler = (value) => {
 		setWageRange({ min: value, max: value + 100 });
@@ -31,8 +31,8 @@ const App = () => {
 
 		let delay = 3000;
 		for (let i = 0; i < intervals.length; i++) {
-			let [ minAge, maxAge ] = [ intervals[i].minAge, intervals[i].maxAge ];
-			let [ minWage, maxWage ] = [ wageRange.min, wageRange.max ];
+			let [minAge, maxAge] = [intervals[i].minAge, intervals[i].maxAge];
+			let [minWage, maxWage] = [wageRange.min, wageRange.max];
 
 			params.minAge = minAge;
 			params.maxAge = maxAge;
@@ -63,7 +63,7 @@ const App = () => {
 		}
 	};
 	return (
-		<div className="App">
+		<div className="App" style={{ margin: '6vw' }}>
 			<Chart
 				players={playersInCurrentAgeRange}
 				onShowPlayers={showPlayersHandler}
