@@ -2,18 +2,23 @@ import React from 'react';
 import './App.css';
 import Chart from './components/Chart';
 import playersSortedByAgeAscd from './data/playersData';
+import Button from '@material-ui/core/Button';
+import RangeSlider from './UI/RangeSlider';
+
 
 const App = () => {
 	const [players, setPlayers] = React.useState(playersSortedByAgeAscd);
 	const [playersInCurrentAgeRange, setPlayersInCurrentAgeRange] = React.useState([]);
 	const [wageRange, setWageRange] = React.useState({ min: 0, max: 100 });
 	const [ageRange, setAgeRange] = React.useState({});
+	const [disabledButton, setDisabledButton] = React.useState(false);
 
-	const sliderValueChangedHandler = (value) => {
-		setWageRange({ min: value, max: value + 100 });
+	const sliderValueChangedHandler = (minValue, maxValue) => {
+		setWageRange({ min: minValue, max: maxValue });
 	};
 
 	const showPlayersHandler = async () => {
+		setDisabledButton(true);
 		var url = new URL('http://localhost:5000/players');
 
 		var params = { minAge: 15, maxAge: 20, minWage: 0, maxWage: 100 };
@@ -63,7 +68,7 @@ const App = () => {
 		}
 	};
 	return (
-		<div className="App" style={{ margin: '6vw' }}>
+		<div className="App" style={{ marginBottom: '12vw', marginTop: '1vw', marginLeft: '12vw', marginRight: '16vw' }}>
 			<Chart
 				players={playersInCurrentAgeRange}
 				onShowPlayers={showPlayersHandler}
@@ -71,6 +76,11 @@ const App = () => {
 				wageRanges={{ min: wageRange.min, max: wageRange.max }}
 				onSliderChanged={sliderValueChangedHandler}
 			/>
+			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+				<RangeSlider onSliderChanged={sliderValueChangedHandler} />
+			</div>
+			<Button variant="contained" color="primary" onClick={showPlayersHandler} >
+				Play</Button>
 		</div>
 	);
 };

@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import DiscreteSlider from '../UI/DiscreteSlider';
+import RangeSlider from '../UI/RangeSlider';
+import Button from '@material-ui/core/Button';
 
 const Chart = (props) => {
 	let options = {
@@ -121,10 +122,12 @@ const Chart = (props) => {
 		<Fragment>
 			<div>
 				<ReactApexChart options={options} series={seriesArr} type="scatter" height={600} />
-				<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-					<DiscreteSlider onSliderChanged={props.onSliderChanged} />
+				{/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+					<RangeSlider onSliderChanged={props.onSliderChanged} />
 				</div>
-				<button onClick={props.onShowPlayers}>PLAY</button>
+				<Button variant="contained" color="primary" onClick={props.onShowPlayers}>
+					Play</Button> */}
+				{/* <button onClick={props.onShowPlayers}>PLAY</button> */}
 			</div>
 		</Fragment>
 	);
