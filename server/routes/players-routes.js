@@ -7,32 +7,35 @@ const url = 'mongodb+srv://dafna:Ds201117827@players.hqacl.mongodb.net/players?r
 
 const getPlayers = async (req, res, next) => {
 	const { minAge, maxAge, minWage, maxWage } = req.query;
-	
-		const client = new MongoClient(url);
-		try {
-			await client.connect();
-			const db = client.db();
-			playersFromDB = await db
-				.collection('players').aggregate([
-					{ $match: {$and: 
-						[ 
-							{ Wage: { $gte: parseInt(minWage) } },
-							{ Wage: { $lte: parseInt(maxWage) } },
-							{ Age: { $gte: parseInt(minAge) } },
-							{ Age: { $lte: parseInt(maxAge) } } 
-						] 
-						}
-					},
-					{ $sample:{size:30}}
-				])
-				.toArray();
-		} catch (error) {
-			return res.json({ messege: 'Could not get data.' });
-		}
 
-		client.close();
-	
-		return res.json(playersFromDB);
+	const client = new MongoClient(url);
+	try {
+		await client.connect();
+		const db = client.db();
+		playersFromDB = await db
+			.collection('players').aggregate([
+				{
+					$match: {
+						$and:
+							[
+								{ Wage: { $gte: parseInt(minWage) } },
+								{ Wage: { $lte: parseInt(maxWage) } },
+								{ Age: { $gte: parseInt(minAge) } },
+								{ Age: { $lte: parseInt(maxAge) } }
+							]
+					}
+				},
+				{ $sample: { size: 30 } }
+			])
+			.toArray();
+	} catch (error) {
+		console.log('error');
+		return res.json([]);
+	}
+
+	client.close();
+
+	return res.json(playersFromDB);
 };
 
 router.get('/', getPlayers);

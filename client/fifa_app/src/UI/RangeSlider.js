@@ -5,18 +5,23 @@ import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles({
     root: {
-        width: 300,
+        width: '55%',
     },
+    title: {
+        fontSize: '20px',
+        color: '#00cc99',
+        fontWeight: 'bold'
+    }
 });
 
 const marks = [
     {
         value: 0,
-        label: '0'
+        label: '€0K'
     },
     {
         value: 600,
-        label: '600'
+        label: '€600K'
     }
 ];
 
@@ -34,8 +39,8 @@ export default function RangeSlider(props) {
 
     return (
         <div className={classes.root}>
-            <Typography id="range-slider" gutterBottom>
-                Wage Range Picker
+            <Typography id="range-slider" gutterBottom className={classes.title}>
+                Wage Filter
       </Typography>
             <Slider
                 value={value}

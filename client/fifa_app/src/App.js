@@ -4,6 +4,7 @@ import Chart from './components/Chart';
 import playersSortedByAgeAscd from './data/playersData';
 import Button from '@material-ui/core/Button';
 import RangeSlider from './UI/RangeSlider';
+import Spinner from './UI/Spinner/Spinner';
 
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
 	const [wageRange, setWageRange] = React.useState({ min: 0, max: 100 });
 	const [ageRange, setAgeRange] = React.useState({});
 	const [isPlayed, setIsPlayed] = React.useState(false);
+	const [spinner, setSpinner] = React.useState(false);
 
 	const sliderValueChangedHandler = (minValue, maxValue) => {
 		setWageRange({ min: minValue, max: maxValue });
@@ -19,6 +21,7 @@ const App = () => {
 
 	const showPlayersHandler = async () => {
 		setIsPlayed(true);
+		setSpinner(true);
 		var url = new URL('http://localhost:5000/players');
 
 		var params = { minAge: 15, maxAge: 20, minWage: 0, maxWage: 100 };
@@ -65,24 +68,31 @@ const App = () => {
 				setAgeRange({ min: minAge, max: maxAge });
 				setPlayersInCurrentAgeRange(resJson);
 				if (minAge == 29) setIsPlayed(false);
+				if (minAge == 15) setSpinner(false);
 			}, delay * i);
 		}
 
 	};
 	return (
 		<div className="App" style={{ marginBottom: '12vw', marginTop: '1vw', marginLeft: '12vw', marginRight: '16vw' }}>
-			<Chart
-				players={playersInCurrentAgeRange}
-				onShowPlayers={showPlayersHandler}
-				ageRanges={{ min: ageRange.min, max: ageRange.max }}
-				wageRanges={{ min: wageRange.min, max: wageRange.max }}
-				onSliderChanged={sliderValueChangedHandler}
-			/>
-			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-				<RangeSlider onSliderChanged={sliderValueChangedHandler} disabled={isPlayed} />
+			<div style={{ height: '500px' }}>
+				<Chart
+					players={playersInCurrentAgeRange}
+					onShowPlayers={showPlayersHandler}
+					ageRanges={{ min: ageRange.min, max: ageRange.max }}
+					wageRanges={{ min: wageRange.min, max: wageRange.max }}
+					onSliderChanged={sliderValueChangedHandler}
+				/>
 			</div>
-			<Button variant="contained" color="primary" onClick={showPlayersHandler} disabled={isPlayed}>
-				Play</Button>
+
+			<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginLeft: '50px' }}>
+				<RangeSlider onSliderChanged={sliderValueChangedHandler} disabled={isPlayed} />
+				{spinner ?
+					<Spinner /> :
+					<Button variant="contained" size="large" color="primary" onClick={showPlayersHandler} disabled={isPlayed}>
+						Play</Button>
+				}
+			</div>
 		</div>
 	);
 };

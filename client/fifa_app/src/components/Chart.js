@@ -1,7 +1,5 @@
 import React, { Fragment } from 'react';
 import ReactApexChart from 'react-apexcharts';
-import RangeSlider from '../UI/RangeSlider';
-import Button from '@material-ui/core/Button';
 
 const Chart = (props) => {
 	let options = {
@@ -19,14 +17,14 @@ const Chart = (props) => {
 			}
 		},
 		title: {
-			text: `FIFA PLAYER COMPARISION`,
+			text: `FIFA PLAYER COMPARISON`,
 			align: 'center',
 			margin: 100,
 			offsetY: 15,
 			floating: true,
 			style: {
 				color: '#00cc99',
-				fontSize: '3.5vw'
+				fontSize: '3.2vw'
 			}
 		},
 		subtitle: {
@@ -43,7 +41,7 @@ const Chart = (props) => {
 		},
 		xaxis: {
 			title: {
-				text: 'Wage',
+				text: 'Wage (in thousand €)',
 				style: {
 					fontSize: '20px',
 					fontWeight: 'bold',
@@ -88,30 +86,28 @@ const Chart = (props) => {
 	};
 
 
-	let seriesArr = props.players.map((player) => {
-		return {
-			name: player.Name,
-			data: [[parseInt(player.Wage), player.Overall]]
-		};
-	});
+	let seriesArr = [{
+		name: 'defualt',
+		data: [[0, 0]]
+	}];
+	let imagesSrc = [];
 
-	if (!props.players || props.players.length === 0) {
-		seriesArr = [{
-			name: 'gugul',
-			data: [[50, 50]]
-		}]
-
-		//options.fill.image.src = ['http://localhost:5000/images/1.png'];
+	if (props.players && props.players.length !== 0) {
+		seriesArr = props.players.map((player) => {
+			return {
+				name: player.Name,
+				data: [[parseInt(player.Wage), player.Overall]]
+			};
+		});
+		imagesSrc = props.players.map((player) => {
+			//logic for frontend only
+			// const index = Math.floor(Math.random() * 100);
+			// return window.location.origin + `/images/${index}.png`;
+			//-------//
+			return `http://localhost:5000/images/${player.Index}.png`;
+		});
 	}
 
-
-	let imagesSrc = props.players.map((player) => {
-		//logic for frontend only
-		// const index = Math.floor(Math.random() * 100);
-		// return window.location.origin + `/images/${index}.png`;
-		//-------//
-		return `http://localhost:5000/images/${player.Index}.png`;
-	});
 
 	options.fill.image.src = imagesSrc;
 	if (!props.ageRanges.min) {
@@ -121,13 +117,7 @@ const Chart = (props) => {
 	return (
 		<Fragment>
 			<div>
-				<ReactApexChart options={options} series={seriesArr} type="scatter" height={600} />
-				{/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-					<RangeSlider onSliderChanged={props.onSliderChanged} />
-				</div>
-				<Button variant="contained" color="primary" onClick={props.onShowPlayers}>
-					Play</Button> */}
-				{/* <button onClick={props.onShowPlayers}>PLAY</button> */}
+				<ReactApexChart options={options} series={seriesArr} type="scatter" height={500} />
 			</div>
 		</Fragment>
 	);
