@@ -1,5 +1,3 @@
-# FIFA PLAYER COMPARISON FULL STACK APP 
-
 ![](/appdemo.PNG)
 
 This app was built with the following tools:
