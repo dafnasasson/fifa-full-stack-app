@@ -24,6 +24,7 @@ Once the user presses play, every 3 seconds he's shown relevant players accordin
 * 28-33
 * 29-34
  
+To run this app, run the server and the client and browse to http://localhost:3000.
 Further specific build instructions for the client and the server are detailed in the following files:
 * For the client side : ./client/fifa_app/README.md
 * For the server side : ./server/README.md
