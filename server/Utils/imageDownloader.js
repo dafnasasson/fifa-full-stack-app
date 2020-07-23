@@ -20,8 +20,7 @@ const download = (url, path, index) => {
 //used this code to download images from URL and save them as png on the file system.
 
 //let i = 0;
-// players.slice(76, 77).forEach((player) => {
-//     player.Wage = parseInt(player.Wage.replace(/\D/g, ''));
+// players.forEach((player) => {
 //     let id = player.Photo.split("/")[6].split(".")[0];
 //     let idNewFormat = id.slice(0, 3) + "/" + id.slice(3, 6);
 //     let picUrl = `https://cdn.sofifa.com/players/${idNewFormat}/19_60.png`;

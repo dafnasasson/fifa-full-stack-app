@@ -3,7 +3,7 @@ const router = express.Router();
 const MongoClient = require('mongodb').MongoClient;
 
 const url = 'mongodb+srv://dafna:Ds201117827@players.hqacl.mongodb.net/players?retryWrites=true&w=majority';
-
+const NUM_PLAYERS_TO_SAMPLE = 30;
 const getPlayers = async (req, res, next) => {
 	const { minAge, maxAge, minWage, maxWage } = req.query;
 
@@ -24,7 +24,7 @@ const getPlayers = async (req, res, next) => {
 							]
 					}
 				},
-				{ $sample: { size: 30 } }
+				{ $sample: { size: NUM_PLAYERS_TO_SAMPLE } }
 			])
 			.toArray();
 	} catch (error) {

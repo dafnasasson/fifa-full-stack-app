@@ -3,7 +3,7 @@ import Chart from './components/Chart';
 import Button from '@material-ui/core/Button';
 import RangeSlider from './UI/RangeSlider';
 import Spinner from './UI/Spinner/Spinner';
-
+import CONSTANTS from './constants';
 
 const App = () => {
 	const [playersInCurrentAgeRange, setPlayersInCurrentAgeRange] = React.useState([]);
@@ -21,15 +21,15 @@ const App = () => {
 		setSpinner(true);
 		var url = new URL('http://localhost:5000/players');
 
-		var params = { minAge: 15, maxAge: 20, minWage: 0, maxWage: 100 };
+		var params = {};
 		let intervals = [];
 
 		//prepare the age group data
-		for (let i = 15; i < 30; i++) {
-			intervals.push({ minAge: i, maxAge: i + 5 });
+		for (let i = CONSTANTS.MIN_POSSIBLE_AGE; i < CONSTANTS.MIN_POSSIBLE_AGE + CONSTANTS.NUM_INTERVALS; i++) {
+			intervals.push({ minAge: i, maxAge: i + CONSTANTS.AGE_INTERVAL });
 		}
 
-		let delay = 1000;
+		let delay = CONSTANTS.DELAY;
 		for (let i = 0; i < intervals.length; i++) {
 			let [minAge, maxAge] = [intervals[i].minAge, intervals[i].maxAge];
 			let [minWage, maxWage] = [wageRange.min, wageRange.max];
@@ -47,8 +47,8 @@ const App = () => {
 			setTimeout(() => {
 				setAgeRange({ min: minAge, max: maxAge });
 				setPlayersInCurrentAgeRange(resJson);
-				if (minAge == 29) setIsPlayed(false);
-				if (minAge == 15) setSpinner(false);
+				if (maxAge == CONSTANTS.MAX_POSSIBLE_AGE) setIsPlayed(false);
+				if (minAge == CONSTANTS.MIN_POSSIBLE_AGE) setSpinner(false);
 			}, delay * i);
 		}
 

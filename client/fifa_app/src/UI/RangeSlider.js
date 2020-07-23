@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
+import CONSTANTS from '../constants';
 
 const useStyles = makeStyles({
     root: {
@@ -16,12 +17,12 @@ const useStyles = makeStyles({
 
 const marks = [
     {
-        value: 0,
-        label: '€0K'
+        value: CONSTANTS.MIN_POSSIBLE_WAGE,
+        label: `€${CONSTANTS.MIN_POSSIBLE_WAGE}K`
     },
     {
-        value: 600,
-        label: '€600K'
+        value: CONSTANTS.MAX_POSSIBLE_WAGE,
+        label: `€${CONSTANTS.MAX_POSSIBLE_WAGE}K`
     }
 ];
 
@@ -47,8 +48,8 @@ export default function RangeSlider(props) {
                 valueLabelDisplay="auto"
                 aria-labelledby="range-slider"
                 marks={marks}
-                min={0}
-                max={600}
+                min={CONSTANTS.MIN_POSSIBLE_WAGE}
+                max={CONSTANTS.MAX_POSSIBLE_WAGE}
                 disabled={props.disabled}
             />
         </div>
