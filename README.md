@@ -25,6 +25,6 @@ Once the user presses play, every 3 seconds he's shown relevant players accordin
 * 29-34
  
 Further specific build instructions for the client and the server are detailed in the following files:
-For the client side : ./client/README.md
+For the client side : ./client/fifa_app/README.md
 For the server side : ./server/README.md
 .
