@@ -1,6 +1,6 @@
 # FIFA PLAYER COMPARISON FULL STACK APP 
 
-![APPDEMO](/appdemo.png)
+![GitHub APPDEMO](/appdemo.PNG)
 Format: ![Alt Text](url)
 
 This app was built with the following tools:
