@@ -1,7 +1,6 @@
 # FIFA PLAYER COMPARISON FULL STACK APP 
 
-![APPDEMO](/appdemo.png)
-Format: ![Alt Text](url)
+![](/appdemo.PNG)
 
 This app was built with the following tools:
 React.js, node.js, Express, mongoDB.
@@ -28,3 +27,4 @@ Once the user presses play, every 3 seconds he's shown relevant players accordin
 Further specific build instructions for the client and the server are detailed in the following files:
 For the client side : ./client/README.md
 For the server side : ./server/README.md
+.
