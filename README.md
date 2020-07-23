@@ -1,7 +1,7 @@
 # FIFA PLAYER COMPARISON FULL STACK APP 
 
-
-pic
+![APPDEMO](/appdemo.png)
+Format: ![Alt Text](url)
 
 This app was built with the following tools:
 React.js, node.js, Express, mongoDB.
