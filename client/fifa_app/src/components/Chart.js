@@ -69,6 +69,17 @@ const Chart = (props) => {
 			min: 40,
 			max: 100
 		},
+		tooltip: {
+			custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+				return (
+					'<div style="margin: 2px; box-shadow: 0 0 20px 40px #ccc; padding: 10px; text-align: center; height: 110px; box-sizing: border-box; background-color: rgb(46, 184, 184,0.1)">' +
+					'<p style="margin:2px;">' + 'Name: ' + '<span style="font-weight: bold;">' + w.config.series[seriesIndex].name + '</span>' + '</p>' +
+					'<p>' + 'Rating: ' + '<span style="font-weight: bold;">' + w.config.series[seriesIndex].data[0][1] + '</span>' + '</p>' +
+					'<p>' + 'Wage: ' + '<span style="font-weight: bold;">' + "€" + w.config.series[seriesIndex].data[0][0] + "K" + '</span>' + '</p>' +
+					'</div>'
+				);
+			}
+		},
 		markers: {
 			size: 30
 		},
