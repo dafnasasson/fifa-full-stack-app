@@ -1,7 +1,7 @@
 ![](/appdemo.PNG)
 
 This app was built with the following tools:
-React.js, node.js, Express, mongoDB.
+React.js, Node.js, Express, MongoDB.
 
 #### This is an app that helps the FIFA users around the world to find potential players for their team.
 The user can select the wage of players he's intersted in.
